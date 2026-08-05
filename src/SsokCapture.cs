@@ -28,7 +28,7 @@ namespace SsokCapture
     // 버전은 여기 한 곳만 고치면 된다. 고치면 변경기록.md 에도 한 줄 남기기.
     public static class App
     {
-        public const string Version = "1.1.0";
+        public const string Version = "1.2.0";
     }
 
     // ---------------- 테마 ----------------
@@ -46,7 +46,7 @@ namespace SsokCapture
         public static readonly Color AccentSoft = Color.FromArgb(230, 240, 251);
         public static readonly Color Hover = Color.FromArgb(240, 242, 246);
         public static readonly Color Press = Color.FromArgb(228, 232, 238);
-        public static readonly Color Board = Color.FromArgb(45, 63, 84);        // #2D3F54
+        public static readonly Color Board = Color.FromArgb(217, 219, 224);     // 위니브 W-Gray-Lv2 #D9DBE0
 
         // 주석 색상 - Adobe Color 테마 15색 + 흰색
         public static readonly Color[] Palette = new Color[] {
@@ -1953,14 +1953,13 @@ namespace SsokCapture
         private Color FrameColor()
         {
             if (frameMode == 1) return Color.FromArgb(238, 240, 244);
-            if (frameMode == 2) return Color.FromArgb(45, 63, 84);
+            if (frameMode == 2) return Color.FromArgb(31, 33, 35);   // 위니브 D-Background #1F2123
             return color;
         }
 
         private int FramePad()
         {
-            // 그림자(퍼짐 30 + 낙차 4)가 여백 안에 다 들어가도록 최소값을 잡는다
-            return Math.Max(Theme.S(40), (int)Math.Round(Math.Min(image.Width, image.Height) * 0.06));
+            return Math.Max(Theme.S(28), (int)Math.Round(Math.Min(image.Width, image.Height) * 0.06));
         }
 
         private int FrameRadius()
@@ -2049,7 +2048,7 @@ namespace SsokCapture
             p.Size = new Size(1, Theme.S(24));
             p.BackColor = Theme.Line;
             int m = (BarH - Theme.S(24)) / 2;
-            p.Margin = new Padding(Theme.S(9), m, Theme.S(9), m);
+            p.Margin = new Padding(Theme.S(6), m, Theme.S(6), m);
             return p;
         }
 
@@ -2081,6 +2080,7 @@ namespace SsokCapture
             else if (kind == "mosaic") status.Text = "모자이크 : 가릴 영역을 드래그하세요. 거칠기는 오른쪽 격자 버튼으로 고르면 돼요";
             else if (kind == "zoom") status.Text = "돋보기 : 확대할 영역을 드래그하세요. 배율은 오른쪽 1.5x / 2x / 3x 로 고르면 돼요";
             else if (kind == "numbox") status.Text = "숫자 박스 : 드래그할 때마다 1, 2, 3 번호가 차례로 붙어요. 중간을 지우면 뒤 번호가 자동으로 당겨져요";
+            else if (kind == "connector") status.Text = "연결선 : 도형 안에서 시작해 다른 도형 안에서 끝내세요. 나중에 도형을 옮겨도 곡선이 따라와요";
             else if (kind == "flowbox") status.Text = "흐름 박스 : 박스를 그릴 때마다 이전 박스와 자동으로 이어져요.    Esc = 새 흐름 시작";
             else status.Text = "이미지 위에 드래그해서 그리세요";
         }
@@ -2120,7 +2120,8 @@ namespace SsokCapture
             left.Controls.Add(MakeTool("circle", "원", "ellipse", "원, 타원으로 강조"));
             left.Controls.Add(MakeTool("arrow-up-right", "화살표", "arrow", "열린 갈매기 머리 화살표"));
             left.Controls.Add(MakeTool("arrow-up-right-fill", "채움 화살표", "arrowfill", "삼각형이 꽉 찬 머리 화살표"));
-            left.Controls.Add(MakeTool("flow-arrow", "흐름 박스", "flowbox", "박스를 그릴 때마다 이전 박스와 곡선 화살표로 자동 연결"));
+            left.Controls.Add(MakeTool("flow-arrow", "연결선", "connector", "도형에서 도형으로 드래그하면 곡선 화살표로 이어져요"));
+            left.Controls.Add(MakeTool("tree-structure", "흐름 박스", "flowbox", "박스를 그릴 때마다 이전 박스와 곡선 화살표로 자동 연결"));
             left.Controls.Add(MakeTool("text-t", "텍스트", "text", "배경 없는 글자. 클릭한 자리에서 바로 입력"));
             left.Controls.Add(MakeTool("textbox", "박스 글자", "textbox", "색이 깔린 글자. 클릭한 자리에서 바로 입력"));
             left.Controls.Add(MakeTool("chat-teardrop", "말풍선", "bubble", "가리킬 지점에서 말풍선 자리까지 드래그"));
@@ -2316,7 +2317,7 @@ namespace SsokCapture
                     string cur = Tip.TextOf(b);
                     Tip.Attach(b, (cur != null && cur.Length > 0) ? (b.Caption + "  ·  " + cur) : b.Caption);
                     b.Caption = null;
-                    b.Fit(19, 13, 38);
+                    b.Fit(19, 11, 38);
                     CenterInBar(b);
                 }
                 left.ResumeLayout(true);
@@ -2427,22 +2428,26 @@ namespace SsokCapture
         private void CanvasPaint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+            bool hasPreview = PreparePreview();
 
             if (viewZoom == 1f)
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 g.DrawImage(image, 0, 0, image.Width, image.Height);
                 foreach (Annotation a in shapes) Painter.Draw(g, a, image);
+                if (hasPreview) DrawPreview(g);
             }
             else
             {
                 // 글자(TextRenderer)는 좌표 변환을 무시하므로, 장면을 원본 배율 버퍼에 그린 뒤 통째로 확대 축소한다
+                // 드래그 미리보기도 버퍼 안에서 그려야 어느 배율에서든 배지 숫자, 말풍선 글자가 온전히 보인다
                 EnsureViewBuffer();
                 using (Graphics pg = Graphics.FromImage(viewBuffer))
                 {
                     pg.SmoothingMode = SmoothingMode.AntiAlias;
                     pg.DrawImage(image, 0, 0, image.Width, image.Height);
                     foreach (Annotation a in shapes) Painter.Draw(pg, a, image);
+                    if (hasPreview) DrawPreview(pg);
                 }
                 Rectangle clip = e.ClipRectangle;
                 if (clip.Width <= 0 || clip.Height <= 0) return;
@@ -2486,45 +2491,6 @@ namespace SsokCapture
                 return;
             }
 
-            if (dragStart.HasValue && tool != "select" && tool != "text" && tool != "textbox")
-            {
-                Point end = SquareConstrain(tool) ? Squared(dragStart.Value, dragCur) : dragCur;
-                preview.Kind = (tool == "flowbox") ? "box" : tool;
-                preview.Outlined = outlined;
-                preview.RefA = (tool == "connector") ? connStart : null;
-                preview.RefB = (tool == "connector" && connHover != connStart) ? connHover : null;
-                preview.X1 = dragStart.Value.X; preview.Y1 = dragStart.Value.Y;
-                preview.X2 = end.X; preview.Y2 = end.Y;
-                preview.Color = color;
-                preview.Thickness = thickness;
-                preview.FontSize = fontSize;
-                preview.Block = blockSize;
-                preview.Zoom = zoomFactor;
-                preview.Text = (tool == "bubble") ? "텍스트" : "";
-                if (tool == "numbox")
-                {
-                    int n = 0;
-                    foreach (Annotation a in shapes) if (a.Kind == "numbox") n++;
-                    preview.Number = n + 1;
-                }
-                // 배율이 걸린 상태에서는 글자(TextRenderer)가 어긋나므로 미리보기의 글자만 감춘다
-                preview.Editing = (viewZoom != 1f) && Painter.IsTextKind(preview.Kind);
-                if (viewZoom != 1f && preview.Kind == "numbox") preview.Kind = "box";
-                Painter.Draw(g, preview, image);
-
-                // 흐름 박스 : 이전 박스에서 그리는 중인 박스까지 이어질 곡선도 미리 보여준다
-                if (tool == "flowbox" && lastFlowBox != null && shapes.Contains(lastFlowBox))
-                {
-                    previewConn.Kind = "connector";
-                    previewConn.RefA = lastFlowBox;
-                    previewConn.RefB = preview;
-                    previewConn.Color = color;
-                    previewConn.Thickness = thickness;
-                    previewConn.Outlined = outlined;
-                    Painter.Draw(g, previewConn, image);
-                }
-            }
-
             if (selected != null && editing == null && shapes.Contains(selected))
                 DrawSelection(g, selected);
 
@@ -2543,6 +2509,52 @@ namespace SsokCapture
             }
 
             g.Restore(ost);
+        }
+
+        // 드래그 중인 도형의 미리보기 준비. 그릴 게 있으면 true
+        private bool PreparePreview()
+        {
+            if (!dragStart.HasValue) return false;
+            if (tool == "select" || tool == "crop" || tool == "text" || tool == "textbox") return false;
+
+            Point end = SquareConstrain(tool) ? Squared(dragStart.Value, dragCur) : dragCur;
+            preview.Kind = (tool == "flowbox") ? "box" : tool;
+            preview.Editing = false;
+            preview.Outlined = outlined;
+            preview.RefA = (tool == "connector") ? connStart : null;
+            preview.RefB = (tool == "connector" && connHover != connStart) ? connHover : null;
+            preview.X1 = dragStart.Value.X; preview.Y1 = dragStart.Value.Y;
+            preview.X2 = end.X; preview.Y2 = end.Y;
+            preview.Color = color;
+            preview.Thickness = thickness;
+            preview.FontSize = fontSize;
+            preview.Block = blockSize;
+            preview.Zoom = zoomFactor;
+            preview.Text = (tool == "bubble") ? "텍스트" : "";
+            if (tool == "numbox")
+            {
+                int n = 0;
+                foreach (Annotation a in shapes) if (a.Kind == "numbox") n++;
+                preview.Number = n + 1;
+            }
+            return true;
+        }
+
+        private void DrawPreview(Graphics g)
+        {
+            Painter.Draw(g, preview, image);
+
+            // 흐름 박스 : 이전 박스에서 그리는 중인 박스까지 이어질 곡선도 미리 보여준다
+            if (tool == "flowbox" && lastFlowBox != null && shapes.Contains(lastFlowBox))
+            {
+                previewConn.Kind = "connector";
+                previewConn.RefA = lastFlowBox;
+                previewConn.RefB = preview;
+                previewConn.Color = color;
+                previewConn.Thickness = thickness;
+                previewConn.Outlined = outlined;
+                Painter.Draw(g, previewConn, image);
+            }
         }
 
         // ---------------- 화면 확대 축소 (보기 전용, 저장 결과와 무관) ----------------
@@ -3175,7 +3187,7 @@ namespace SsokCapture
             }
             if (frameMode == 0) return inner;
 
-            // 배경 프레임 : 여백 + 그림자 + 둥근 모서리
+            // 배경 프레임 : 솔리드 배경 여백 + 둥근 모서리 (그림자 없음)
             int pad = FramePad();
             int rad = FrameRadius();
             Bitmap outp = new Bitmap(inner.Width + pad * 2, inner.Height + pad * 2, PixelFormat.Format24bppRgb);
@@ -3185,22 +3197,6 @@ namespace SsokCapture
                 g.SmoothingMode = SmoothingMode.AntiAlias;
 
                 RectangleF ir = new RectangleF(pad, pad, inner.Width, inner.Height);
-
-                // 넓게 퍼지는 옅은 그림자 - 퍼짐 30, 최대 농도 12%, 낙차 4
-                // 층당 최소 투명도(1/255) 때문에, 목표 농도가 되는 층 수를 역산해서 퍼짐 범위에 고르게 편다
-                int spread = Theme.S(30);
-                float drop = Theme.S(4);
-                double target = 0.10;
-                int layers = Math.Max(1, (int)Math.Round(Math.Log(1 - target) / Math.Log(1 - 1.0 / 255)));
-                for (int k = layers; k >= 1; k--)
-                {
-                    float i = spread * k / (float)layers;
-                    RectangleF sr = new RectangleF(ir.X - i, ir.Y - i + drop, ir.Width + i * 2, ir.Height + i * 2);
-                    using (GraphicsPath sp = Theme.Round(sr, rad + i))
-                    using (SolidBrush sb = new SolidBrush(Color.FromArgb(1, 0, 0, 0)))
-                        g.FillPath(sb, sp);
-                }
-
                 using (TextureBrush tb = new TextureBrush(inner))
                 {
                     tb.TranslateTransform(pad, pad);
