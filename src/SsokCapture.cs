@@ -28,7 +28,7 @@ namespace SsokCapture
     // 버전은 여기 한 곳만 고치면 된다. 고치면 변경기록.md 에도 한 줄 남기기.
     public static class App
     {
-        public const string Version = "1.2.0";
+        public const string Version = "1.3.0";
     }
 
     // ---------------- 테마 ----------------
@@ -361,7 +361,10 @@ namespace SsokCapture
             Data["copy"] = "M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z";
             Data["download-simple"] = "M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z";
             Data["grid-four"] = "M200,40H56A16,16,0,0,0,40,56V200a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40Zm0,80H136V56h64ZM120,56v64H56V56ZM56,136h64v64H56Zm144,64H136V136h64v64Z";
-            Data["crop"] = "M240,192a8,8,0,0,1-8,8H200v32a8,8,0,0,1-16,0V200H64a8,8,0,0,1-8-8V72H24a8,8,0,0,1,0-16H56V24a8,8,0,0,1,16,0V184H232A8,8,0,0,1,240,192ZM96,72h88v88a8,8,0,0,0,16,0V64a8,8,0,0,0-8-8H96a8,8,0,0,0,0,16Z";
+            Data["text-align-left"] = "M32,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H40A8,8,0,0,1,32,64Zm8,48H168a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16Zm176,24H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm-48,40H40a8,8,0,0,0,0,16H168a8,8,0,0,0,0-16Z";
+            Data["text-align-center"] = "M32,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H40A8,8,0,0,1,32,64ZM64,96a8,8,0,0,0,0,16H192a8,8,0,0,0,0-16Zm152,40H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm-24,40H64a8,8,0,0,0,0,16H192a8,8,0,0,0,0-16Z";
+            Data["text-align-right"] = "M32,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H40A8,8,0,0,1,32,64ZM216,96H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,40H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,40H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z";
+            Data["crop"] ="M240,192a8,8,0,0,1-8,8H200v32a8,8,0,0,1-16,0V200H64a8,8,0,0,1-8-8V72H24a8,8,0,0,1,0-16H56V24a8,8,0,0,1,16,0V184H232A8,8,0,0,1,240,192ZM96,72h88v88a8,8,0,0,0,16,0V64a8,8,0,0,0-8-8H96a8,8,0,0,0,0,16Z";
             Data["text-t"] ="M208,56V88a8,8,0,0,1-16,0V64H136V192h24a8,8,0,0,1,0,16H96a8,8,0,0,1,0-16h24V64H64V88a8,8,0,0,1-16,0V56a8,8,0,0,1,8-8H200A8,8,0,0,1,208,56Z";
             Data["textbox"] = "M112,40a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80v96a16,16,0,0,0,16,16h80v16a8,8,0,0,0,16,0V48A8,8,0,0,0,112,40ZM24,176V80h80v96ZM248,80v96a16,16,0,0,1-16,16H144a8,8,0,0,1,0-16h88V80H144a8,8,0,0,1,0-16h88A16,16,0,0,1,248,80ZM88,112a8,8,0,0,1-8,8H72v24a8,8,0,0,1-16,0V120H48a8,8,0,0,1,0-16H80A8,8,0,0,1,88,112Z";
             Data["number-circle-one"] ="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM140,80v96a8,8,0,0,1-16,0V95l-11.56,7.71a8,8,0,1,1-8.88-13.32l24-16A8,8,0,0,1,140,80Z";
@@ -797,7 +800,7 @@ namespace SsokCapture
                      ControlStyles.OptimizedDoubleBuffer | ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Transparent;
             Cursor = Cursors.Hand;
-            Size = new Size(Theme.S(40), Theme.S(36));
+            Size = new Size(Theme.S(35), Theme.S(36));
         }
 
         protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
@@ -1010,6 +1013,7 @@ namespace SsokCapture
         public float FontSize = 19f;
         public float Block = 14f;    // 모자이크 한 칸 크기
         public float Zoom = 2f;      // 돋보기 배율
+        public int Align = 1;        // 일반 텍스트 정렬 : 0 좌, 1 중앙, 2 우
         public bool Editing;
 
         public Point P1 { get { return new Point(X1, Y1); } }
@@ -1307,6 +1311,13 @@ namespace SsokCapture
             Rectangle tr = BubbleTextRect(a);
             Font f = Theme.Bubble(a.FontSize);
 
+            // 정렬은 여러 줄일 때 줄이 맞춰지는 기준이다
+            TextFormatFlags flags = TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix |
+                                    TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak;
+            if (a.Align == 0) flags |= TextFormatFlags.Left;
+            else if (a.Align == 2) flags |= TextFormatFlags.Right;
+            else flags |= TextFormatFlags.HorizontalCenter;
+
             if (a.Outlined)
             {
                 int o = Math.Max(1, (int)Math.Round(Theme.A(1.3f)));
@@ -1316,10 +1327,10 @@ namespace SsokCapture
                         if (dx == 0 && dy == 0) continue;
                         Rectangle rr = tr;
                         rr.Offset(dx, dy);
-                        TextRenderer.DrawText(g, a.Text, f, rr, OutlineInk, DrawFlags);
+                        TextRenderer.DrawText(g, a.Text, f, rr, OutlineInk, flags);
                     }
             }
-            TextRenderer.DrawText(g, a.Text, f, tr, a.Color, DrawFlags);
+            TextRenderer.DrawText(g, a.Text, f, tr, a.Color, flags);
         }
 
         // 배경 있는 텍스트 : 둥근 사각형 채움 (말풍선에서 꼬리만 뺀 것)
@@ -1937,6 +1948,18 @@ namespace SsokCapture
         private float fontSize = Theme.A(19f);
         private float blockSize = Theme.A(14f);
         private float zoomFactor = 2f;
+        private int textAlign = 1;   // 일반 텍스트 정렬 : 0 좌, 1 중앙, 2 우
+        private FlatButton alignBtn;
+
+        private static readonly string[] AlignIcons = new string[] { "text-align-left", "text-align-center", "text-align-right" };
+        private static readonly string[] AlignNames = new string[] { "왼쪽", "중앙", "오른쪽" };
+
+        private static HorizontalAlignment AlignOf(int align)
+        {
+            if (align == 0) return HorizontalAlignment.Left;
+            if (align == 2) return HorizontalAlignment.Right;
+            return HorizontalAlignment.Center;
+        }
 
         // 그리기 드래그
         private Point? dragStart;
@@ -2192,6 +2215,29 @@ namespace SsokCapture
                 sizes.Add(sb);
             }
 
+            // 일반 텍스트 정렬 : 누를 때마다 좌 -> 중앙 -> 우 순환
+            alignBtn = new FlatButton(AlignIcons[textAlign], null);
+            alignBtn.Fit(19, 11, 38);
+            alignBtn.Visible = false;
+            CenterInBar(alignBtn);
+            alignBtn.Activated += delegate
+            {
+                textAlign = (textAlign + 1) % 3;
+                alignBtn.Icon = AlignIcons[textAlign];
+                alignBtn.Invalidate();
+
+                Annotation target = (editing != null) ? editing : selected;
+                if (target != null && target.Kind == "text")
+                {
+                    target.Align = textAlign;
+                    if (inlineBox != null && editing != null) inlineBox.TextAlign = AlignOf(textAlign);
+                    canvas.Invalidate();
+                }
+                status.Text = "텍스트 정렬 : " + AlignNames[textAlign] + "  (여러 줄일 때 줄이 맞춰지는 기준이에요)";
+            };
+            Tip.Attach(alignBtn, "텍스트 정렬 (누를 때마다 왼쪽, 중앙, 오른쪽 순환)");
+            left.Controls.Add(alignBtn);
+
             float[] blockValues = new float[] { Theme.A(8f), Theme.A(14f), Theme.A(24f) };
             int[] blockCells = new int[] { 6, 4, 3 };
             string[] blockTips = new string[] { "곱게", "보통", "굵게" };
@@ -2317,14 +2363,16 @@ namespace SsokCapture
                     string cur = Tip.TextOf(b);
                     Tip.Attach(b, (cur != null && cur.Length > 0) ? (b.Caption + "  ·  " + cur) : b.Caption);
                     b.Caption = null;
-                    b.Fit(19, 11, 38);
+                    b.Fit(19, 10, 38);
                     CenterInBar(b);
                 }
                 left.ResumeLayout(true);
                 right.ResumeLayout(true);
             }
 
-            bar.Tag = left.PreferredSize.Width + right.PreferredSize.Width;
+            // 최소 폭은 가장 넓은 모드(텍스트 = 크기 3개 + 정렬 버튼) 기준으로 잡는다
+            bar.Tag = left.PreferredSize.Width + right.PreferredSize.Width
+                      + alignBtn.Width + alignBtn.Margin.Horizontal;
             return bar;
         }
 
@@ -2345,6 +2393,12 @@ namespace SsokCapture
             // 어느 모드에서든 이 자리에는 3개짜리 그룹 하나만 보인다 (툴바 너비를 일정하게 유지)
             foreach (WidthButton w in widths) { w.Checked = (w.Value == thickness); w.Visible = !bubbleMode && !mosaicMode && !zoomMode; w.Invalidate(); }
             foreach (TextSizeButton t in sizes) { t.Checked = (t.Value == fontSize); t.Visible = bubbleMode; t.Invalidate(); }
+            if (alignBtn != null)
+            {
+                alignBtn.Visible = (mode == "text");
+                alignBtn.Icon = AlignIcons[textAlign];
+                alignBtn.Invalidate();
+            }
             foreach (BlockButton b in blocks) { b.Checked = (b.Value == blockSize); b.Visible = mosaicMode; b.Invalidate(); }
             foreach (LabelButton z in zooms) { z.Checked = (z.Value == zoomFactor); z.Visible = zoomMode; z.Invalidate(); }
         }
@@ -2517,7 +2571,9 @@ namespace SsokCapture
             if (!dragStart.HasValue) return false;
             if (tool == "select" || tool == "crop" || tool == "text" || tool == "textbox") return false;
 
-            Point end = SquareConstrain(tool) ? Squared(dragStart.Value, dragCur) : dragCur;
+            Point end = dragCur;
+            if (SquareConstrain(tool)) end = Squared(dragStart.Value, dragCur);
+            else if (AxisConstrain(tool)) end = AxisSnap(dragStart.Value, dragCur);
             preview.Kind = (tool == "flowbox") ? "box" : tool;
             preview.Editing = false;
             preview.Outlined = outlined;
@@ -2656,6 +2712,20 @@ namespace SsokCapture
             return false;
         }
 
+        // 화살표는 Shift 를 누른 동안 수평 또는 수직으로만 그려진다
+        private static bool AxisConstrain(string kind)
+        {
+            if ((Control.ModifierKeys & Keys.Shift) != Keys.Shift) return false;
+            return kind == "arrow" || kind == "arrowfill";
+        }
+
+        // 더 많이 움직인 축으로 스냅한다
+        private static Point AxisSnap(Point fixedPt, Point moving)
+        {
+            int dx = Math.Abs(moving.X - fixedPt.X), dy = Math.Abs(moving.Y - fixedPt.Y);
+            return (dx >= dy) ? new Point(moving.X, fixedPt.Y) : new Point(fixedPt.X, moving.Y);
+        }
+
         // 끄는 방향은 유지한 채 가로세로를 같게 맞춘다
         private static Point Squared(Point fixedPt, Point moving)
         {
@@ -2726,7 +2796,8 @@ namespace SsokCapture
             inlineBox.BorderStyle = BorderStyle.None;
             inlineBox.WordWrap = true;
             inlineBox.ScrollBars = ScrollBars.None;
-            inlineBox.TextAlign = HorizontalAlignment.Center;
+            if (a.Kind == "text") textAlign = a.Align;
+            inlineBox.TextAlign = (a.Kind == "text") ? AlignOf(a.Align) : HorizontalAlignment.Center;
             inlineBox.AcceptsReturn = true;
             inlineBox.Font = Theme.Bubble(a.FontSize * viewZoom);
             SyncInlineColors(a);
@@ -2855,6 +2926,7 @@ namespace SsokCapture
                     {
                         color = selected.Color;
                         outlined = selected.Outlined;
+                        if (selected.Kind == "text") textAlign = selected.Align;
                         if (Painter.IsTextKind(selected.Kind) || selected.Kind == "numbox") { fontSize = selected.FontSize; thickness = selected.Thickness; }
                         else if (selected.Kind == "mosaic") blockSize = selected.Block;
                         else if (selected.Kind == "zoom") { zoomFactor = selected.Zoom; thickness = selected.Thickness; }
@@ -2898,16 +2970,19 @@ namespace SsokCapture
                 {
                     int dx = ip.X - grabOrigin.X, dy = ip.Y - grabOrigin.Y;
                     bool round = SquareConstrain(selected.Kind);
+                    bool axis = AxisConstrain(selected.Kind);
                     if (grab == "p1")
                     {
                         Point np = new Point(origP1.X + dx, origP1.Y + dy);
                         if (round) np = Squared(selected.P2, np);
+                        else if (axis) np = AxisSnap(selected.P2, np);
                         selected.X1 = np.X; selected.Y1 = np.Y;
                     }
                     else if (grab == "p2")
                     {
                         Point np = new Point(origP2.X + dx, origP2.Y + dy);
                         if (round) np = Squared(selected.P1, np);
+                        else if (axis) np = AxisSnap(selected.P1, np);
                         selected.X2 = np.X; selected.Y2 = np.Y;
                     }
                     else
@@ -2998,6 +3073,11 @@ namespace SsokCapture
                     Point q = Squared(s, new Point(ex, ey));
                     ex = q.X; ey = q.Y;
                 }
+                else if (AxisConstrain(tool))
+                {
+                    Point q = AxisSnap(s, new Point(ex, ey));
+                    ex = q.X; ey = q.Y;
+                }
 
                 if (tool == "flowbox")
                 {
@@ -3056,6 +3136,7 @@ namespace SsokCapture
             a.Block = blockSize;
             a.Zoom = zoomFactor;
             a.Outlined = outlined;
+            a.Align = textAlign;
             a.Text = "";
             shapes.Add(a);
             Renumber();
