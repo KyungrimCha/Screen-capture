@@ -28,7 +28,7 @@ namespace SsokCapture
     // 버전은 여기 한 곳만 고치면 된다. 고치면 변경기록.md 에도 한 줄 남기기.
     public static class App
     {
-        public const string Version = "1.3.0";
+        public const string Version = "1.4.1";
     }
 
     // ---------------- 테마 ----------------
@@ -364,7 +364,12 @@ namespace SsokCapture
             Data["text-align-left"] = "M32,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H40A8,8,0,0,1,32,64Zm8,48H168a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16Zm176,24H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm-48,40H40a8,8,0,0,0,0,16H168a8,8,0,0,0,0-16Z";
             Data["text-align-center"] = "M32,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H40A8,8,0,0,1,32,64ZM64,96a8,8,0,0,0,0,16H192a8,8,0,0,0,0-16Zm152,40H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm-24,40H64a8,8,0,0,0,0,16H192a8,8,0,0,0,0-16Z";
             Data["text-align-right"] = "M32,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H40A8,8,0,0,1,32,64ZM216,96H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,40H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,40H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z";
-            Data["crop"] ="M240,192a8,8,0,0,1-8,8H200v32a8,8,0,0,1-16,0V200H64a8,8,0,0,1-8-8V72H24a8,8,0,0,1,0-16H56V24a8,8,0,0,1,16,0V184H232A8,8,0,0,1,240,192ZM96,72h88v88a8,8,0,0,0,16,0V64a8,8,0,0,0-8-8H96a8,8,0,0,0,0,16Z";
+            Data["crop"] = "M240,192a8,8,0,0,1-8,8H200v32a8,8,0,0,1-16,0V200H64a8,8,0,0,1-8-8V72H24a8,8,0,0,1,0-16H56V24a8,8,0,0,1,16,0V184H232A8,8,0,0,1,240,192ZM96,72h88v88a8,8,0,0,0,16,0V64a8,8,0,0,0-8-8H96a8,8,0,0,0,0,16Z";
+            Data["arrow-square-down"] = "M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,176H48V48H208V208Zm-42.34-77.66a8,8,0,0,1,0,11.32l-32,32a8,8,0,0,1-11.32,0l-32-32a8,8,0,0,1,11.32-11.32L120,148.69V88a8,8,0,0,1,16,0v60.69l18.34-18.35A8,8,0,0,1,165.66,130.34Z";
+            Data["arrow-up"] = "M205.66,117.66a8,8,0,0,1-11.32,0L136,59.31V216a8,8,0,0,1-16,0V59.31L61.66,117.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0l72,72A8,8,0,0,1,205.66,117.66Z";
+            Data["arrow-down"] = "M205.66,149.66l-72,72a8,8,0,0,1-11.32,0l-72-72a8,8,0,0,1,11.32-11.32L120,196.69V40a8,8,0,0,1,16,0V196.69l58.34-58.35a8,8,0,0,1,11.32,11.32Z";
+            Data["arrow-left"] = "M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z";
+            Data["arrow-right"] = "M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z";
             Data["text-t"] ="M208,56V88a8,8,0,0,1-16,0V64H136V192h24a8,8,0,0,1,0,16H96a8,8,0,0,1,0-16h24V64H64V88a8,8,0,0,1-16,0V56a8,8,0,0,1,8-8H200A8,8,0,0,1,208,56Z";
             Data["textbox"] = "M112,40a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80v96a16,16,0,0,0,16,16h80v16a8,8,0,0,0,16,0V48A8,8,0,0,0,112,40ZM24,176V80h80v96ZM248,80v96a16,16,0,0,1-16,16H144a8,8,0,0,1,0-16h88V80H144a8,8,0,0,1,0-16h88A16,16,0,0,1,248,80ZM88,112a8,8,0,0,1-8,8H72v24a8,8,0,0,1-16,0V120H48a8,8,0,0,1,0-16H80A8,8,0,0,1,88,112Z";
             Data["number-circle-one"] ="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM140,80v96a8,8,0,0,1-16,0V95l-11.56,7.71a8,8,0,1,1-8.88-13.32l24-16A8,8,0,0,1,140,80Z";
@@ -644,7 +649,7 @@ namespace SsokCapture
             Values = values;
             this.columns = columns;
             SelectedIndex = selected;
-            cell = Theme.S(25);
+            cell = Theme.S(24);
             int rows = (Total + columns - 1) / columns;
             Size = new Size(cell * columns, cell * rows);
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint |
@@ -1014,6 +1019,7 @@ namespace SsokCapture
         public float Block = 14f;    // 모자이크 한 칸 크기
         public float Zoom = 2f;      // 돋보기 배율
         public int Align = 1;        // 일반 텍스트 정렬 : 0 좌, 1 중앙, 2 우
+        public int Side = 0;         // 강조 박스 화살표 위치 : 0 위, 1 오른쪽, 2 아래, 3 왼쪽
         public bool Editing;
 
         public Point P1 { get { return new Point(X1, Y1); } }
@@ -1227,6 +1233,7 @@ namespace SsokCapture
         {
             if (a.Kind == "connector") { DrawConnector(g, a); return; }
             if (a.Kind == "arrowfill") { DrawArrowFill(g, a); return; }
+            if (a.Kind == "spotbox") { DrawSpotBox(g, a); return; }
             if (a.Kind == "text") { DrawPlainText(g, a); return; }
             if (a.Kind == "textbox") { DrawTextBox(g, a); return; }
             if (a.Kind == "bubble") { DrawBubble(g, a); return; }
@@ -1260,44 +1267,86 @@ namespace SsokCapture
             }
         }
 
-        // 채움 화살표 : 몸통 선 + 꽉 찬 삼각형 머리
-        private static void DrawArrowFill(Graphics g, Annotation a)
+        // 채움 화살표 : 몸통 선 + 꽉 찬 삼각형 머리 (강조 박스에서도 재사용)
+        private static void DrawSolidArrow(Graphics g, PointF from, PointF to, Color color, float thickness, bool outlined)
         {
-            float dx = a.X2 - a.X1, dy = a.Y2 - a.Y1;
+            float dx = to.X - from.X, dy = to.Y - from.Y;
             double len = Math.Sqrt(dx * dx + dy * dy);
             if (len < 1) return;
 
-            float head = Math.Max(a.Thickness * 5.5f, Theme.A(16f));
+            float head = Math.Max(thickness * 5.5f, Theme.A(16f));
             head = (float)Math.Min(head, len * 0.4);
             if (head < Theme.A(6f)) return;
 
             double ang = Math.Atan2(dy, dx);
             double spread = 26.0 * Math.PI / 180.0;
 
-            PointF tip = new PointF(a.X2, a.Y2);
-            PointF w1 = new PointF((float)(a.X2 - head * Math.Cos(ang - spread)),
-                                   (float)(a.Y2 - head * Math.Sin(ang - spread)));
-            PointF w2 = new PointF((float)(a.X2 - head * Math.Cos(ang + spread)),
-                                   (float)(a.Y2 - head * Math.Sin(ang + spread)));
+            PointF tip = to;
+            PointF w1 = new PointF((float)(to.X - head * Math.Cos(ang - spread)),
+                                   (float)(to.Y - head * Math.Sin(ang - spread)));
+            PointF w2 = new PointF((float)(to.X - head * Math.Cos(ang + spread)),
+                                   (float)(to.Y - head * Math.Sin(ang + spread)));
             PointF[] tri = new PointF[] { tip, w1, w2 };
 
             // 몸통은 머리 밑변까지만 (끝이 삼각형을 뚫고 나오지 않게)
             float bodyLen = (float)(len - head * Math.Cos(spread) * 0.85);
-            PointF bodyEnd = new PointF((float)(a.X1 + bodyLen * Math.Cos(ang)),
-                                        (float)(a.Y1 + bodyLen * Math.Sin(ang)));
+            PointF bodyEnd = new PointF((float)(from.X + bodyLen * Math.Cos(ang)),
+                                        (float)(from.Y + bodyLen * Math.Sin(ang)));
 
-            if (a.Outlined)
+            if (outlined)
             {
-                using (Pen halo = MakeStrokePen(OutlineInk, a.Thickness + Theme.A(2.8f)))
-                    g.DrawLine(halo, new PointF(a.X1, a.Y1), bodyEnd);
+                using (Pen halo = MakeStrokePen(OutlineInk, thickness + Theme.A(2.8f)))
+                    g.DrawLine(halo, from, bodyEnd);
                 using (Pen haloTri = MakeStrokePen(OutlineInk, Theme.A(2.8f)))
                     g.DrawPolygon(haloTri, tri);
             }
 
-            using (Pen pen = MakeStrokePen(a.Color, a.Thickness))
-                g.DrawLine(pen, new PointF(a.X1, a.Y1), bodyEnd);
-            using (SolidBrush fill = new SolidBrush(a.Color))
+            using (Pen pen = MakeStrokePen(color, thickness))
+                g.DrawLine(pen, from, bodyEnd);
+            using (SolidBrush fill = new SolidBrush(color))
                 g.FillPolygon(fill, tri);
+        }
+
+        private static void DrawArrowFill(Graphics g, Annotation a)
+        {
+            DrawSolidArrow(g, new PointF(a.X1, a.Y1), new PointF(a.X2, a.Y2), a.Color, a.Thickness, a.Outlined);
+        }
+
+        // 강조 박스 : 선택한 변 바깥에서 박스를 가리키는 채움 화살표
+        public static void SpotArrow(Annotation a, out PointF from, out PointF to)
+        {
+            Rectangle r = Norm(a.X1, a.Y1, a.X2, a.Y2);
+            float cx = r.X + r.Width / 2f, cy = r.Y + r.Height / 2f;
+
+            // 화살표 크기는 선 굵기에 비례한다 - 굵은 박스에는 길고 굵은 화살표가 붙는다
+            float gap = Theme.A(6f) + a.Thickness * 0.6f;
+            float len = Math.Max(a.Thickness * 14f, Theme.A(34f));
+            len = Math.Min(len, Math.Max(Theme.A(30f), Math.Min(r.Width, r.Height) * 0.7f));
+
+            switch (a.Side)
+            {
+                case 1:  from = new PointF(r.Right + gap + len, cy); to = new PointF(r.Right + gap, cy); break;   // 오른쪽
+                case 2:  from = new PointF(cx, r.Bottom + gap + len); to = new PointF(cx, r.Bottom + gap); break; // 아래
+                case 3:  from = new PointF(r.Left - gap - len, cy); to = new PointF(r.Left - gap, cy); break;     // 왼쪽
+                default: from = new PointF(cx, r.Top - gap - len); to = new PointF(cx, r.Top - gap); break;       // 위
+            }
+        }
+
+        private static void DrawSpotBox(Graphics g, Annotation a)
+        {
+            Rectangle r = Norm(a.X1, a.Y1, a.X2, a.Y2);
+            if (r.Width > 0 && r.Height > 0)
+            {
+                if (a.Outlined)
+                    using (Pen halo = MakeStrokePen(OutlineInk, a.Thickness + Theme.A(2.8f)))
+                        g.DrawRectangle(halo, r);
+                using (Pen pen = MakeStrokePen(a.Color, a.Thickness))
+                    g.DrawRectangle(pen, r);
+            }
+
+            PointF from, to;
+            SpotArrow(a, out from, out to);
+            DrawSolidArrow(g, from, to, a.Color, a.Thickness, a.Outlined);
         }
 
         private const TextFormatFlags DrawFlags =
@@ -1748,6 +1797,13 @@ namespace SsokCapture
                 case "numbox":
                     if (BadgeRect(a).Contains(p)) return true;
                     goto case "box";
+                case "spotbox":
+                    {
+                        PointF sf, st;
+                        SpotArrow(a, out sf, out st);
+                        if (NearSegment(sf, st, p, slack + a.Thickness)) return true;
+                        goto case "box";
+                    }
                 case "box":
                     {
                         Rectangle r = Norm(a.X1, a.Y1, a.X2, a.Y2);
@@ -1807,12 +1863,26 @@ namespace SsokCapture
 
         public Bitmap Result;
 
+        // 폭이 다른 모니터가 어긋나게 배치되면 가상 화면 사각형에 어느 모니터에도 속하지 않는
+        // 빈 구역이 생기고, 그 부분을 한 번에 복사하면 화면 버퍼의 잔상(흰 긁힘)이 섞인다.
+        // 모니터별로 따로 복사하고 빈 구역은 어두운 단색으로 채운다.
+        public static Bitmap GrabVirtualScreen(Rectangle vs)
+        {
+            Bitmap shot = new Bitmap(vs.Width, vs.Height);
+            using (Graphics g = Graphics.FromImage(shot))
+            {
+                g.Clear(Color.FromArgb(31, 33, 35));
+                foreach (Screen sc in Screen.AllScreens)
+                    g.CopyFromScreen(sc.Bounds.X, sc.Bounds.Y,
+                                     sc.Bounds.X - vs.X, sc.Bounds.Y - vs.Y, sc.Bounds.Size);
+            }
+            return shot;
+        }
+
         public RegionForm()
         {
             area = SystemInformation.VirtualScreen;
-            screen = new Bitmap(area.Width, area.Height);
-            using (Graphics g = Graphics.FromImage(screen))
-                g.CopyFromScreen(area.X, area.Y, 0, 0, screen.Size);
+            screen = GrabVirtualScreen(area);
 
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint |
                      ControlStyles.OptimizedDoubleBuffer, true);
@@ -1950,9 +2020,15 @@ namespace SsokCapture
         private float zoomFactor = 2f;
         private int textAlign = 1;   // 일반 텍스트 정렬 : 0 좌, 1 중앙, 2 우
         private FlatButton alignBtn;
+        private int spotSide = 0;    // 강조 박스 화살표 위치 : 0 위, 1 오른쪽, 2 아래, 3 왼쪽
+        private FlatButton sideBtn;
 
         private static readonly string[] AlignIcons = new string[] { "text-align-left", "text-align-center", "text-align-right" };
         private static readonly string[] AlignNames = new string[] { "왼쪽", "중앙", "오른쪽" };
+
+        // 화살표가 붙는 변 기준. 위에 붙으면 아래를 향해 박스를 가리킨다
+        private static readonly string[] SideIcons = new string[] { "arrow-down", "arrow-left", "arrow-up", "arrow-right" };
+        private static readonly string[] SideNames = new string[] { "위", "오른쪽", "아래", "왼쪽" };
 
         private static HorizontalAlignment AlignOf(int align)
         {
@@ -2105,6 +2181,7 @@ namespace SsokCapture
             else if (kind == "numbox") status.Text = "숫자 박스 : 드래그할 때마다 1, 2, 3 번호가 차례로 붙어요. 중간을 지우면 뒤 번호가 자동으로 당겨져요";
             else if (kind == "connector") status.Text = "연결선 : 도형 안에서 시작해 다른 도형 안에서 끝내세요. 나중에 도형을 옮겨도 곡선이 따라와요";
             else if (kind == "flowbox") status.Text = "흐름 박스 : 박스를 그릴 때마다 이전 박스와 자동으로 이어져요.    Esc = 새 흐름 시작";
+            else if (kind == "spotbox") status.Text = "강조 박스 : 박스를 그리면 화살표가 함께 붙어요. 화살표 위치는 오른쪽 방향 버튼으로 고르세요";
             else status.Text = "이미지 위에 드래그해서 그리세요";
         }
 
@@ -2139,6 +2216,7 @@ namespace SsokCapture
 
             left.Controls.Add(MakeTool("cursor", "선택", "select", "주석을 고르고 옮겨요"));
             left.Controls.Add(MakeTool("square", "박스", "box", "사각형으로 강조"));
+            left.Controls.Add(MakeTool("arrow-square-down", "강조 박스", "spotbox", "박스를 그리면 고른 방향에서 화살표가 가리켜요"));
             left.Controls.Add(MakeTool("number-circle-one", "숫자 박스", "numbox", "그리는 순서대로 1, 2, 3 번호가 붙어요"));
             left.Controls.Add(MakeTool("circle", "원", "ellipse", "원, 타원으로 강조"));
             left.Controls.Add(MakeTool("arrow-up-right", "화살표", "arrow", "열린 갈매기 머리 화살표"));
@@ -2237,6 +2315,28 @@ namespace SsokCapture
             };
             Tip.Attach(alignBtn, "텍스트 정렬 (누를 때마다 왼쪽, 중앙, 오른쪽 순환)");
             left.Controls.Add(alignBtn);
+
+            // 강조 박스 화살표 위치 : 누를 때마다 위 -> 오른쪽 -> 아래 -> 왼쪽 순환
+            sideBtn = new FlatButton(SideIcons[spotSide], null);
+            sideBtn.Fit(19, 11, 38);
+            sideBtn.Visible = false;
+            CenterInBar(sideBtn);
+            sideBtn.Activated += delegate
+            {
+                spotSide = (spotSide + 1) % 4;
+                sideBtn.Icon = SideIcons[spotSide];
+                sideBtn.Invalidate();
+
+                Annotation target = selected;
+                if (target != null && target.Kind == "spotbox")
+                {
+                    target.Side = spotSide;
+                    canvas.Invalidate();
+                }
+                status.Text = "강조 화살표 위치 : " + SideNames[spotSide];
+            };
+            Tip.Attach(sideBtn, "강조 화살표 위치 (누를 때마다 위, 오른쪽, 아래, 왼쪽 순환)");
+            left.Controls.Add(sideBtn);
 
             float[] blockValues = new float[] { Theme.A(8f), Theme.A(14f), Theme.A(24f) };
             int[] blockCells = new int[] { 6, 4, 3 };
@@ -2398,6 +2498,12 @@ namespace SsokCapture
                 alignBtn.Visible = (mode == "text");
                 alignBtn.Icon = AlignIcons[textAlign];
                 alignBtn.Invalidate();
+            }
+            if (sideBtn != null)
+            {
+                sideBtn.Visible = (mode == "spotbox");
+                sideBtn.Icon = SideIcons[spotSide];
+                sideBtn.Invalidate();
             }
             foreach (BlockButton b in blocks) { b.Checked = (b.Value == blockSize); b.Visible = mosaicMode; b.Invalidate(); }
             foreach (LabelButton z in zooms) { z.Checked = (z.Value == zoomFactor); z.Visible = zoomMode; z.Invalidate(); }
@@ -2708,7 +2814,7 @@ namespace SsokCapture
         {
             if (kind == "zoom") return true;
             if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-                return kind == "box" || kind == "ellipse" || kind == "numbox" || kind == "flowbox";
+                return kind == "box" || kind == "ellipse" || kind == "numbox" || kind == "flowbox" || kind == "spotbox";
             return false;
         }
 
@@ -2749,7 +2855,7 @@ namespace SsokCapture
             {
                 Annotation a = shapes[i];
                 Rectangle r;
-                if (a.Kind == "box" || a.Kind == "numbox" || a.Kind == "ellipse")
+                if (a.Kind == "box" || a.Kind == "numbox" || a.Kind == "ellipse" || a.Kind == "spotbox")
                     r = Painter.Norm(a.X1, a.Y1, a.X2, a.Y2);
                 else if (a.Kind == "textbox" || a.Kind == "bubble")
                     r = Painter.BubbleRect(a);
@@ -2927,6 +3033,7 @@ namespace SsokCapture
                         color = selected.Color;
                         outlined = selected.Outlined;
                         if (selected.Kind == "text") textAlign = selected.Align;
+                        if (selected.Kind == "spotbox") spotSide = selected.Side;
                         if (Painter.IsTextKind(selected.Kind) || selected.Kind == "numbox") { fontSize = selected.FontSize; thickness = selected.Thickness; }
                         else if (selected.Kind == "mosaic") blockSize = selected.Block;
                         else if (selected.Kind == "zoom") { zoomFactor = selected.Zoom; thickness = selected.Thickness; }
@@ -3137,6 +3244,7 @@ namespace SsokCapture
             a.Zoom = zoomFactor;
             a.Outlined = outlined;
             a.Align = textAlign;
+            a.Side = spotSide;
             a.Text = "";
             shapes.Add(a);
             Renumber();
@@ -3399,10 +3507,11 @@ namespace SsokCapture
                 Bitmap shot = null;
                 if (fullScreen)
                 {
-                    Rectangle vs = SystemInformation.VirtualScreen;
-                    shot = new Bitmap(vs.Width, vs.Height);
+                    // 전체 화면 = 커서가 있는 모니터 전체. 모니터 배치가 어긋나 있어도 빈 구역이 안 섞인다
+                    Rectangle mb = Screen.FromPoint(Cursor.Position).Bounds;
+                    shot = new Bitmap(mb.Width, mb.Height);
                     using (Graphics g = Graphics.FromImage(shot))
-                        g.CopyFromScreen(vs.X, vs.Y, 0, 0, shot.Size);
+                        g.CopyFromScreen(mb.X, mb.Y, 0, 0, shot.Size);
                 }
                 else
                 {
