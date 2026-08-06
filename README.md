@@ -3,7 +3,7 @@
 윈도우용 화면 캡처 + 주석 도구. Snagit을 대신할 개인 도구로 만들었어요.
 설치 없이 `쏙캡처.exe` 하나로 돌아가요 (.NET Framework는 윈도우 10/11 내장).
 
-![버전](https://img.shields.io/badge/version-1.2.0-2D6EF0)
+![버전](https://img.shields.io/badge/version-1.3.0-2D6EF0)
 
 ## 기능
 
