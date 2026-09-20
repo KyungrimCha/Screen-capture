@@ -1,5 +1,5 @@
 ﻿// ==========================================================
-// 쏙캡처 (SsokCapture) - 개인용 화면 캡처 + 주석 도구
+// 소울곰 캡처 (SoulgomCapture) - 개인용 화면 캡처 + 주석 도구 (구 쏙캡처)
 // 영역/전체 캡처, 선택/이동, 박스, 원, 화살표, 말풍선(인라인 편집), 복사, 저장
 // 아이콘 : Phosphor Icons (MIT) - https://phosphoricons.com
 // 색상   : Adobe Color 테마 (소울곰 지정)
@@ -17,8 +17,8 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-[assembly: System.Reflection.AssemblyTitle("쏙캡처")]
-[assembly: System.Reflection.AssemblyProduct("SsokCapture")]
+[assembly: System.Reflection.AssemblyTitle("소울곰 캡처")]
+[assembly: System.Reflection.AssemblyProduct("SoulgomCapture")]
 [assembly: System.Reflection.AssemblyVersion(SsokCapture.App.Version + ".0")]
 [assembly: System.Reflection.AssemblyFileVersion(SsokCapture.App.Version + ".0")]
 
@@ -28,7 +28,7 @@ namespace SsokCapture
     // 버전은 여기 한 곳만 고치면 된다. 고치면 변경기록.md 에도 한 줄 남기기.
     public static class App
     {
-        public const string Version = "1.4.1";
+        public const string Version = "1.5.1";
     }
 
     // ---------------- 테마 ----------------
@@ -72,7 +72,25 @@ namespace SsokCapture
 
         // 주석(선 굵기, 글자, 모자이크)은 캡처 이미지의 픽셀 단위다.
         // 고배율 화면에서는 캡처 이미지도 그만큼 조밀하므로 같은 비율로 키워야 눈에 보이는 크기가 같아진다.
-        public static float A(float v) { return v * Scale; }
+        // 기준은 시스템 배율이 아니라 "캡처한 모니터의 배율"(AnnScale) - 100% 모니터를 캡처하면
+        // 주석도 절반 크기로 들어가서 이미지 대비 비율이 어디서든 같다.
+        public static float AnnScale = 1f;
+        public static float A(float v) { return v * AnnScale; }
+
+        // 화면 좌표가 속한 모니터의 배율 (캡처 시점에 호출)
+        public static float ScaleAt(Point screenPt)
+        {
+            try
+            {
+                Native.POINT p; p.X = screenPt.X; p.Y = screenPt.Y;
+                IntPtr mon = Native.MonitorFromPoint(p, 2); // MONITOR_DEFAULTTONEAREST
+                uint dx, dy;
+                if (Native.GetDpiForMonitor(mon, 0, out dx, out dy) == 0 && dx > 0)
+                    return dx / 96f;
+            }
+            catch { }
+            return Scale;
+        }
 
         // 말풍선 글꼴은 픽셀 단위 - 화면 미리보기와 저장 결과가 같아진다
         public static Font Bubble(float px)
@@ -106,6 +124,7 @@ namespace SsokCapture
         {
             using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))
                 Scale = g.DpiX / 96f;
+            AnnScale = Scale;
 
             UiFamily = Resolve(new string[] { "Pretendard", "Malgun Gothic" });
             BubbleFamily = Resolve(new string[] { "Pretendard SemiBold", "Pretendard", "Malgun Gothic" });
@@ -347,6 +366,8 @@ namespace SsokCapture
         static Icons()
         {
             Data["cursor"] = "M168,132.69,214.08,115l.33-.13A16,16,0,0,0,213,85.07L52.92,32.8A15.95,15.95,0,0,0,32.8,52.92L85.07,213a15.82,15.82,0,0,0,14.41,11l.78,0a15.84,15.84,0,0,0,14.61-9.59l.13-.33L132.69,168,184,219.31a16,16,0,0,0,22.63,0l12.68-12.68a16,16,0,0,0,0-22.63ZM195.31,208,144,156.69a16,16,0,0,0-26,4.93c0,.11-.09.22-.13.32l-17.65,46L48,48l159.85,52.2-45.95,17.64-.32.13a16,16,0,0,0-4.93,26h0L208,195.31Z";
+            // 곰 발바닥 (소울곰 캡처 앱 아이콘, 소울곰 픽 2026-09-20)
+            Data["paw"] = "M22 108 A23 23 0 1 0 68 108 A23 23 0 1 0 22 108 Z M67 64 A27 27 0 1 0 121 64 A27 27 0 1 0 67 64 Z M135 64 A27 27 0 1 0 189 64 A27 27 0 1 0 135 64 Z M188 108 A23 23 0 1 0 234 108 A23 23 0 1 0 188 108 Z M128 110 C166 110 194 134 194 168 C194 200 165 218 128 218 C91 218 62 200 62 168 C62 134 90 110 128 110 Z";
             Data["selection"] = "M152,40a8,8,0,0,1-8,8H112a8,8,0,0,1,0-16h32A8,8,0,0,1,152,40Zm-8,168H112a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16ZM208,32H184a8,8,0,0,0,0,16h24V72a8,8,0,0,0,16,0V48A16,16,0,0,0,208,32Zm8,72a8,8,0,0,0-8,8v32a8,8,0,0,0,16,0V112A8,8,0,0,0,216,104Zm0,72a8,8,0,0,0-8,8v24H184a8,8,0,0,0,0,16h24a16,16,0,0,0,16-16V184A8,8,0,0,0,216,176ZM40,152a8,8,0,0,0,8-8V112a8,8,0,0,0-16,0v32A8,8,0,0,0,40,152Zm32,56H48V184a8,8,0,0,0-16,0v24a16,16,0,0,0,16,16H72a8,8,0,0,0,0-16ZM72,32H48A16,16,0,0,0,32,48V72a8,8,0,0,0,16,0V48H72a8,8,0,0,0,0-16Z";
             Data["frame-corners"] = "M200,80v32a8,8,0,0,1-16,0V88H160a8,8,0,0,1,0-16h32A8,8,0,0,1,200,80ZM96,168H72V144a8,8,0,0,0-16,0v32a8,8,0,0,0,8,8H96a8,8,0,0,0,0-16ZM232,56V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Z";
             Data["square"] = "M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,176H48V48H208V208Z";
@@ -1048,12 +1069,48 @@ namespace SsokCapture
         [DllImport("user32.dll")] public static extern bool RegisterHotKey(IntPtr hWnd, int id, uint mods, uint vk);
         [DllImport("user32.dll")] public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
         [DllImport("user32.dll")] public static extern bool DestroyIcon(IntPtr hIcon);
+        [DllImport("user32.dll")] public static extern IntPtr CreateIconIndirect(ref ICONINFO info);
+        [DllImport("gdi32.dll")] public static extern IntPtr CreateBitmap(int w, int h, uint planes, uint bpp, IntPtr bits);
+        [DllImport("user32.dll")] public static extern IntPtr MonitorFromPoint(POINT pt, uint flags);
+        [DllImport("shcore.dll")] public static extern int GetDpiForMonitor(IntPtr hmon, int type, out uint dx, out uint dy);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT { public int X; public int Y; }
+        [DllImport("gdi32.dll")] public static extern bool DeleteObject(IntPtr hObj);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct ICONINFO
+        {
+            public bool fIcon;
+            public int xHotspot;
+            public int yHotspot;
+            public IntPtr hbmMask;
+            public IntPtr hbmColor;
+        }
+
+        [DllImport("gdi32.dll")] public static extern IntPtr CreateDIBSection(IntPtr hdc, ref BITMAPINFOHEADER bmi, uint usage, out IntPtr bits, IntPtr hSection, uint offset);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct BITMAPINFOHEADER
+        {
+            public uint biSize;
+            public int biWidth;
+            public int biHeight;
+            public ushort biPlanes;
+            public ushort biBitCount;
+            public uint biCompression;
+            public uint biSizeImage;
+            public int biXPelsPerMeter;
+            public int biYPelsPerMeter;
+            public uint biClrUsed;
+            public uint biClrImportant;
+        }
         [DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern uint RegisterWindowMessage(string message);
         [DllImport("user32.dll")] public static extern bool PostMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
         public static readonly IntPtr HWND_BROADCAST = new IntPtr(0xFFFF);
 
-        // 이미 떠 있는 쏙캡처에게 "창을 보여라" 라고 알리는 메시지
+        // 이미 떠 있는 소울곰 캡처에게 "창을 보여라" 라고 알리는 메시지
         private static uint showMsg;
         public static uint WM_SHOW_SSOK
         {
@@ -1862,6 +1919,7 @@ namespace SsokCapture
         private Point cur;
 
         public Bitmap Result;
+        public Rectangle ResultRect;   // 화면 좌표 기준 선택 영역 (배율 판정용)
 
         // 폭이 다른 모니터가 어긋나게 배치되면 가상 화면 사각형에 어느 모니터에도 속하지 않는
         // 빈 구역이 생기고, 그 부분을 한 번에 복사하면 화면 버퍼의 잔상(흰 긁힘)이 섞인다.
@@ -1987,6 +2045,7 @@ namespace SsokCapture
             if (r.Width >= 5 && r.Height >= 5)
             {
                 Result = screen.Clone(r, screen.PixelFormat);
+                ResultRect = new Rectangle(r.X + area.X, r.Y + area.Y, r.Width, r.Height);
                 Close();
                 return;
             }
@@ -2107,10 +2166,15 @@ namespace SsokCapture
         private int BarH { get { return Theme.S(62); } }
         private int HandleR { get { return Theme.S(7); } }
 
+        // 이 편집 창의 주석 배율. 편집 창마다 캡처된 모니터가 다를 수 있어서
+        // 그리기/입력 진입점마다 전역 AnnScale 을 자기 값으로 되돌린다.
+        private readonly float annK = Theme.AnnScale;
+        private void UseK() { Theme.AnnScale = annK; }
+
         public EditorForm(Bitmap img)
         {
             image = img;
-            Text = "쏙캡처 편집  ·  " + img.Width + " x " + img.Height;
+            Text = "소울곰 캡처 편집  ·  " + img.Width + " x " + img.Height;
             KeyPreview = true;
             Font = Theme.Ui;
             BackColor = Theme.Bar;
@@ -2587,6 +2651,7 @@ namespace SsokCapture
 
         private void CanvasPaint(object sender, PaintEventArgs e)
         {
+            UseK();
             Graphics g = e.Graphics;
             bool hasPreview = PreparePreview();
 
@@ -2939,6 +3004,7 @@ namespace SsokCapture
 
         private void LayoutInline()
         {
+            UseK();
             if (editing == null || inlineBox == null) return;
             editing.Text = inlineBox.Text;
             Rectangle t = Painter.BubbleTextRect(editing);
@@ -2967,6 +3033,7 @@ namespace SsokCapture
 
         private void CommitEdit()
         {
+            UseK();
             if (editing == null) return;
             Annotation a = editing;
             if (inlineBox != null) a.Text = inlineBox.Text.TrimEnd();
@@ -3009,6 +3076,7 @@ namespace SsokCapture
 
         private void CanvasMouseDown(object sender, MouseEventArgs e)
         {
+            UseK();
             if (e.Button != MouseButtons.Left) return;
             canvas.Focus();
             Point ip = ToImg(e.Location);
@@ -3069,6 +3137,7 @@ namespace SsokCapture
 
         private void CanvasMouseMove(object sender, MouseEventArgs e)
         {
+            UseK();
             Point ip = ToImg(e.Location);
 
             if (tool == "select")
@@ -3122,6 +3191,7 @@ namespace SsokCapture
 
         private void CanvasMouseUp(object sender, MouseEventArgs e)
         {
+            UseK();
             if (tool == "select") { grab = null; return; }
             if (!dragStart.HasValue) return;
 
@@ -3296,7 +3366,7 @@ namespace SsokCapture
 
         private void AfterImageChange()
         {
-            Text = "쏙캡처 편집  ·  " + image.Width + " x " + image.Height;
+            Text = "소울곰 캡처 편집  ·  " + image.Width + " x " + image.Height;
             if (viewBuffer != null) { viewBuffer.Dispose(); viewBuffer = null; }
             canvas.Size = new Size((int)Math.Round(image.Width * viewZoom),
                                    (int)Math.Round(image.Height * viewZoom));
@@ -3353,7 +3423,7 @@ namespace SsokCapture
         {
             CommitEdit();
             if (shapes.Count == 0) return;
-            if (MessageBox.Show("주석을 모두 지울까요?", "쏙캡처",
+            if (MessageBox.Show("주석을 모두 지울까요?", "소울곰 캡처",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
             foreach (Annotation a in shapes) a.DropCache();
             shapes.Clear();
@@ -3367,6 +3437,7 @@ namespace SsokCapture
 
         private Bitmap Composite()
         {
+            UseK();
             Bitmap inner = new Bitmap(image.Width, image.Height, PixelFormat.Format24bppRgb);
             using (Graphics g = Graphics.FromImage(inner))
             {
@@ -3505,6 +3576,7 @@ namespace SsokCapture
                 }
 
                 Bitmap shot = null;
+                Point refPt = Cursor.Position;   // 캡처가 이뤄진 모니터의 배율을 알아내는 기준점
                 if (fullScreen)
                 {
                     // 전체 화면 = 커서가 있는 모니터 전체. 모니터 배치가 어긋나 있어도 빈 구역이 안 섞인다
@@ -3519,11 +3591,19 @@ namespace SsokCapture
                     {
                         rf.ShowDialog();
                         shot = rf.Result;
+                        if (shot != null)
+                        {
+                            Rectangle rr = rf.ResultRect;
+                            refPt = new Point(rr.X + rr.Width / 2, rr.Y + rr.Height / 2);
+                        }
                     }
                 }
 
                 if (shot != null)
                 {
+                    // 주석 크기는 캡처한 모니터의 배율을 따른다 (100% 모니터 = 절반 크기)
+                    Theme.AnnScale = Theme.ScaleAt(refPt);
+
                     // 캡처에 성공하면 런처 창은 트레이로 내려가고 편집 창만 남는다
                     if (extraVisible) extraHide.Show();
                     new EditorForm(shot).Show();
@@ -3566,21 +3646,49 @@ namespace SsokCapture
 
         private static Icon MakeAppIcon()
         {
-            using (Bitmap bmp = new Bitmap(32, 32))
+            using (Bitmap bmp = new Bitmap(32, 32, PixelFormat.Format32bppArgb))
             {
                 using (Graphics g = Graphics.FromImage(bmp))
                 {
                     g.Clear(Color.Transparent);
                     g.SmoothingMode = SmoothingMode.AntiAlias;
-                    Icons.Draw(g, "selection", new RectangleF(0.5f, 0.5f, 31f, 31f), Theme.Accent);
+                    Icons.Draw(g, "paw", new RectangleF(0.5f, 0.5f, 31f, 31f), Theme.Accent);
                 }
-                IntPtr h = bmp.GetHicon();
+
+                // GetHicon() 은 반투명 가장자리를 검정과 섞어서 밝은 배경에서 회색 테(그림자처럼 보임)가 생긴다.
+                // 32bpp DIB 에 알파를 그대로 복사해 CreateIconIndirect 로 만들면 가장자리가 깨끗하다.
+                Native.BITMAPINFOHEADER bi = new Native.BITMAPINFOHEADER();
+                bi.biSize = (uint)Marshal.SizeOf(typeof(Native.BITMAPINFOHEADER));
+                bi.biWidth = 32;
+                bi.biHeight = -32;   // 음수 = top-down, LockBits 순서와 동일
+                bi.biPlanes = 1;
+                bi.biBitCount = 32;
+
+                IntPtr bits;
+                IntPtr hColor = Native.CreateDIBSection(IntPtr.Zero, ref bi, 0, out bits, IntPtr.Zero, 0);
+                BitmapData d = bmp.LockBits(new Rectangle(0, 0, 32, 32), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
                 try
                 {
-                    using (Icon tmp = Icon.FromHandle(h))
+                    byte[] buf = new byte[32 * 32 * 4];
+                    Marshal.Copy(d.Scan0, buf, 0, buf.Length);
+                    Marshal.Copy(buf, 0, bits, buf.Length);
+                }
+                finally { bmp.UnlockBits(d); }
+
+                IntPtr hMask = Native.CreateBitmap(32, 32, 1, 1, IntPtr.Zero);
+                Native.ICONINFO info = new Native.ICONINFO();
+                info.fIcon = true;
+                info.hbmColor = hColor;
+                info.hbmMask = hMask;
+                IntPtr hIcon = Native.CreateIconIndirect(ref info);
+                Native.DeleteObject(hColor);
+                Native.DeleteObject(hMask);
+                try
+                {
+                    using (Icon tmp = Icon.FromHandle(hIcon))
                         return (Icon)tmp.Clone();
                 }
-                finally { Native.DestroyIcon(h); }
+                finally { Native.DestroyIcon(hIcon); }
             }
         }
 
@@ -3598,13 +3706,13 @@ namespace SsokCapture
             menu.Items.Add("영역 캡처  (" + hotkeyName + ")", null, delegate { Shooter.Region(null); });
             menu.Items.Add("전체 화면", null, delegate { Shooter.Full(null); });
             menu.Items.Add(new ToolStripSeparator());
-            menu.Items.Add("쏙캡처 창 보이기", null, delegate { ShowWindow(); });
+            menu.Items.Add("소울곰 캡처 창 보이기", null, delegate { ShowWindow(); });
             menu.Items.Add(new ToolStripSeparator());
             menu.Items.Add("종료", null, delegate { exitRequested = true; Close(); });
 
             tray = new NotifyIcon();
             tray.Icon = appIcon;
-            tray.Text = "쏙캡처 v" + App.Version + "  ·  " + hotkeyName + " 로 캡처";
+            tray.Text = "소울곰 캡처 v" + App.Version + "  ·  " + hotkeyName + " 로 캡처";
             tray.ContextMenuStrip = menu;
             tray.DoubleClick += delegate { ShowWindow(); };
             tray.Visible = true;
@@ -3612,7 +3720,7 @@ namespace SsokCapture
 
         public MainForm()
         {
-            Text = "쏙캡처";
+            Text = "소울곰 캡처";
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             TopMost = true;
             BackColor = Theme.Bar;
@@ -3686,7 +3794,7 @@ namespace SsokCapture
             if (m.Msg == Native.WM_HOTKEY && m.WParam.ToInt32() == HotkeyId)
                 Shooter.Region(null);
             else if (m.Msg == (int)Native.WM_SHOW_SSOK)
-                ShowWindow();   // 두 번째로 실행된 쏙캡처가 보낸 신호
+                ShowWindow();   // 두 번째로 실행된 소울곰 캡처가 보낸 신호
             base.WndProc(ref m);
         }
 
@@ -3700,7 +3808,7 @@ namespace SsokCapture
                 if (!toldAboutTray)
                 {
                     toldAboutTray = true;
-                    tray.BalloonTipTitle = "쏙캡처는 계속 켜져 있어요";
+                    tray.BalloonTipTitle = "소울곰 캡처는 계속 켜져 있어요";
                     tray.BalloonTipText = (hotkeyName != null)
                         ? (hotkeyName + " 를 누르면 바로 캡처돼요. 완전히 끄려면 트레이 아이콘 우클릭 > 종료.")
                         : "트레이 아이콘을 눌러 캡처하세요. 완전히 끄려면 우클릭 > 종료.";
@@ -3716,8 +3824,8 @@ namespace SsokCapture
             if (open > 0)
             {
                 DialogResult r = MessageBox.Show(
-                    "편집 중인 창이 " + open + "개 있어요. 쏙캡처를 종료할까요?",
-                    "쏙캡처", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    "편집 중인 창이 " + open + "개 있어요. 소울곰 캡처를 종료할까요?",
+                    "소울곰 캡처", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (r != DialogResult.Yes) { e.Cancel = true; exitRequested = false; return; }
             }
 

@@ -1,11 +1,11 @@
-﻿# 쏙캡처가 Smart App Control에 차단됐을 때 실행하는 해제 스크립트.
+﻿# 소울곰 캡처가 Smart App Control에 차단됐을 때 실행하는 해제 스크립트.
 # 실행을 시도하고, 막히면 재빌드로 파일 해시를 바꿔 다시 시도한다 (최대 8회).
 $csc = Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319\csc.exe'
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$exe = Join-Path $here '쏙캡처.exe'
+$exe = Join-Path $here '소울곰 캡처.exe'
 $src = Join-Path $here 'src\SsokCapture.cs'
 
-Get-Process -Name '쏙캡처' -ErrorAction SilentlyContinue | Stop-Process -Force
+Get-Process -Name '소울곰 캡처' -ErrorAction SilentlyContinue | Stop-Process -Force
 Start-Sleep -Milliseconds 300
 
 foreach ($i in 1..8) {
